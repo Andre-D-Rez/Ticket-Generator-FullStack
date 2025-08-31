@@ -22,7 +22,7 @@ avatarInput.addEventListener("change", function() {
       this.value = "";
       return;
     }
-    /*
+    /* Valida o tipo do arquivo com JS ao invés de HTML
     if (!acceptedTypes.includes(file.type)) {
       errorsDiv.textContent = "Please upload a valid image file (JPEG or PNG).";
       this.value = "";
@@ -48,21 +48,6 @@ avatarInput.addEventListener("change", function() {
   }
 });
 
-/*
-const nameInput = document.getElementById("name");
-const nameError = document.createElement('small');
-nameError.className = 'error-message';
-nameInput.parentNode.insertBefore(nameError, nameInput.nextSibling);
-
-nameInput.addEventListener("input", () => {
-    const name = nameInput.value.trim();
-    if (name.length < 3) {
-        nameError.textContent = "Please enter a name with at least 3 characters.";
-    } else {
-        nameError.textContent = "";
-    }
-});
-*/
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -85,13 +70,17 @@ form.addEventListener("submit", (e) => {
       year: 'numeric'
     });
   }
-
+  
   // Valida os dados
   if (!name) errors.push("Please enter your name."); 
-  // if (name.trim().includes(' '))  - Aceita apenas o primeiro nome
-  // if (!name.trim().includes(' '))  - Requer o nome completo
-  // const nameError = document.getElementById("name-error");
-  // document.getElementById('name-error').textContent = 'Please enter your name.'; - Adiciona o erro embaixo do campo
+
+  /* Aceita apenas o primeiro nome 
+  if (name.trim().includes(' ')) errors.push("Please enter only your first name.")
+  */
+
+  /* Requer o nome completo
+  if (!name.trim().includes(' ')) errors.push("Please enter your full name.")
+  */
 
   if (!email || !/\S+@\S+\.\S+/.test(email)) errors.push("Please enter a valid email address.");
   if (!avatarInput.files[0]) {
@@ -100,36 +89,71 @@ form.addEventListener("submit", (e) => {
   if (!github || !/^@(?!-)(?!.*--)[a-zA-Z0-9-]{1,39}(?<!-)$/.test(github)) {
     errors.push("Please enter a valid GitHub username.");
   }
-  // if (!github.startsWith('@')) { github = '@' + github; } - Adiciona @ se não tiver
-  /*
+
+  /* Adiciona @ se não tiver no github
+  if (!github.startsWith('@')) { github = '@' + github; } 
+  */
+
+  /* Adiciona @ no ticket, garantindo que nao seja duplicado
   const ticketGitHub = document.getElementById("ticketGitHub");
-  const cleanGithub = github.startsWith('@') ? github.substring(1) : github;  - Garante que o @ nao seja duplicado
+  const cleanGithub = github.startsWith('@') ? github.substring(1) : github;
   ticketGitHub.textContent = '@' + cleanGithub;
   */
 
+  // Exibe os erros
   if (errors.length > 0) {
     errorsDiv.innerHTML = errors.join("<br>");
-    // alert(errors.join("\n")); - Mostra o erro atraves de alertas
-    /*
+    return;
+  }
+
+  /* Adiciona o erro embaixo/acima campo
+  const nameError = document.getElementById("name-error");
+  document.getElementById('name-error').textContent = 'Please enter your name.'; - Adiciona o erro embaixo do campo
+  */
+
+  /* Mostra o erro atraves de alertas
+  if (errors.length > 0) {
+    alert(errors.join("\n")); - Mostra o erro atraves de alertas   
+    return;
+  }
+  */
+
+  /* Mostra o erro atraves de Toastify
+  if (errors.length > 0) {
     errors.forEach(error => {
       Toastify({
         text: error,
         duration: 3000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
         style: {
-          background: "linear-gradient(to right, #ff416c, #ff4b2b)", // Um gradiente vermelho para destacar o erro
+          background: "linear-gradient(to right, #ff416c, #ff4b2b)",
           borderRadius: "5px"
         },
-        onClick: function(){} // Callback after click
+        onClick: function(){}
       }).showToast();
     });
     return;
-    */
-    return;
   }
+  */
+
+  /* Validação e exibição de erro em tempo real
+  const nameInput = document.getElementById("name");
+  const nameError = document.createElement('small');
+  nameError.className = 'error-message';
+  nameInput.parentNode.insertBefore(nameError, nameInput.nextSibling);
+
+  nameInput.addEventListener("input", () => {
+    const name = nameInput.value.trim();
+    if (name.length < 3) {
+        nameError.textContent = "Please enter a name with at least 3 characters.";
+    } else {
+        nameError.textContent = "";
+    }
+  });
+  */
 
   // Preenche os dados no ticket
   document.getElementById('ticketNameHeader').textContent = name;
