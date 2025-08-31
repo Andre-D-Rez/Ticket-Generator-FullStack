@@ -139,7 +139,7 @@ form.addEventListener("submit", (e) => {
   }
   */
 
-  /* Validação e exibição de erro em tempo real
+  /* Validação e exibição de erros em tempo real
   const nameInput = document.getElementById("name");
   const nameError = document.createElement('small');
   nameError.className = 'error-message';
