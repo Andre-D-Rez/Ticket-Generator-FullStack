@@ -8,6 +8,7 @@
   <title>Coding Conf 2025 - Conference Ticket Generator</title>
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="css/style.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> -->
 
 </head>
 
@@ -31,8 +32,7 @@
 
         <div class="form-control">
           <label for="avatar">Upload Avatar</label>
-          <img id="avatarPreview" alt="Avatar Preview" style="display:none; width:80px; height:80px; border-radius:50%; margin: 12px auto;" />
-          <input type="file" id="avatar" name="avatar" accept="image/*"  style="display:none" required/>
+          <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" style="display:none" required/>
           <label for="avatar" class="avatar-label">
             <div class="avatar-message">
               <img src="assets/images/icon-upload.svg" alt="Upload Icon" class="upload-icon"/>
@@ -42,13 +42,14 @@
           </label>
           <small class="form-avatar-info">
             <img src="assets/images/icon-info.svg" alt="Icon Info" class="icon-info">
-            Upload your photo (JPG or PNG, max size: 500KB).
+            Upload your photo (JPEG, JPG or PNG, max size: 500KB).
           </small>
         </div>
 
         <div class="form-control">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required />
+          <!-- <small class="name-error"> -->
         </div>
 
         <div class="form-control">
@@ -99,6 +100,7 @@
   </main>
 
   <script src="./javascript/script.js"></script>
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> -->
 
 </body>
 
