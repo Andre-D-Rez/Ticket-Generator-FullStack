@@ -9,6 +9,32 @@ const avatarInput = document.getElementById("avatar");
 const avatarPreview = document.getElementById("avatarPreview");
 const avatarMessage = document.querySelector(".avatar-message");
 
+// Drag & Drop support
+const dropZone = document.querySelector(".avatar-label");
+
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropZone.classList.add("drag-over");
+});
+
+dropZone.addEventListener("dragleave", () => {
+  dropZone.classList.remove("drag-over");
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.classList.remove("drag-over");
+
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    avatarInput.files = e.dataTransfer.files;
+
+    // Reuse your existing validation + preview logic
+    const changeEvent = new Event("change");
+    avatarInput.dispatchEvent(changeEvent);
+  }
+});
+
 // Preview e Validação do avatar
 avatarInput.addEventListener("change", function() {
   const file = this.files[0];
