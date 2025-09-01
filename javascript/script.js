@@ -9,7 +9,7 @@ const avatarInput = document.getElementById("avatar");
 const avatarPreview = document.getElementById("avatarPreview");
 const avatarMessage = document.querySelector(".avatar-message");
 
-// Drag & Drop support
+// Drag e Drop
 const dropZone = document.querySelector(".avatar-label");
 
 dropZone.addEventListener("dragover", (e) => {
@@ -29,7 +29,6 @@ dropZone.addEventListener("drop", (e) => {
   if (file) {
     avatarInput.files = e.dataTransfer.files;
 
-    // Reuse your existing validation + preview logic
     const changeEvent = new Event("change");
     avatarInput.dispatchEvent(changeEvent);
   }
